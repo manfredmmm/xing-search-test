@@ -1,5 +1,7 @@
 # XING search test
 
+XING search form using the following specs: React, Babel, ESLINT, CSSNext, CSS Modules, webpack and yarn.
+
 ### Setup
 Run the following command from the root directory to install the necessary dependencies
 ```

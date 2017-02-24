@@ -1,3 +1,5 @@
+@import '../colors.css';
+
 .checkbox {
   display: none;
 }
@@ -5,12 +7,12 @@
 .list {
   width: calc(100% - 6px);
   margin-left: 3px;
-  border: 1px solid #dfdfdf;
-  background-color: white;
+  border: 1px solid var(--alto);
+  background-color: var(--white);
 }
 
 .location {
-  border: 1px solid #dfdfdf;
+  border: 1px solid var(--alto);
   border-width: 1px 0;
   font-size: 13px;
   line-height: 32px;

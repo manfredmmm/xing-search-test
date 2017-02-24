@@ -20,3 +20,9 @@
 .submit:hover {
   background-color: color(#e3f000 blackness(20%))
 }
+
+.results {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}

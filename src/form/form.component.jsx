@@ -29,12 +29,24 @@ class FormComponent extends Component {
   }
 
   _sendForm(event) {
-    // TODO show result on HTML tag (NO CONSOLE LOG)
-    console.log(`Search: ${this.state.search} | Categories: ${this.state.categories} | Location: ${this.state.location}`);
+    this.setState({ showResult: true });
     event.preventDefault();
   }
 
   render() {
+    let showResults = null;
+    if (this.state.showResult) {
+      showResults = (
+        <div className={styles.results}>
+          <h4>Form values</h4>
+          <ul>
+            <li>Search: {this.state.search}</li>
+            <li>Categories: {this.state.categories}</li>
+            <li>Location: {this.state.location}</li>
+          </ul>
+        </div>
+      );
+    }
     return (
       <div>
         <form className={styles.form} onSubmit={event => this._sendForm(event)}>
@@ -52,6 +64,7 @@ class FormComponent extends Component {
             value="Search"
           />
         </form>
+        {showResults}
       </div>
     );
   }

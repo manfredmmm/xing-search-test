@@ -1,0 +1,22 @@
+.form {
+  position: relative;
+}
+
+.submit {
+  background-color: #e3f000;
+  padding: 12px 20px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  margin-top: 3px;
+  cursor: pointer;
+  transition-duration: .3s;
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: bold;
+  color: #2a2a38;
+}
+
+.submit:hover {
+  background-color: color(#e3f000 blackness(20%))
+}

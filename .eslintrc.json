@@ -1,0 +1,16 @@
+{
+  "extends": "airbnb",
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "comma-dangle": "off",
+    "react/sort-comp": "off",
+    "no-underscore-dangle": "off",
+    "react/no-array-index-key": "off"
+  },
+  "globals": {
+    "document": false
+  }
+}

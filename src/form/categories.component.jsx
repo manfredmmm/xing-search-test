@@ -13,16 +13,22 @@ class CategoriesComponent extends Component {
   _changeFilter(event) {
     const newValue = parseInt(event.target.value, 10);
     const valueIdx = this.state.values.findIndex(value => value === newValue);
-    const newValues = this.state.values;
+    let newValues = [];
 
     if (valueIdx > -1) {
-      newValues.splice(valueIdx, 1);
+      newValues = [
+        ...this.state.values.slice(0, valueIdx),
+        ...this.state.values.slice(valueIdx + 1, this.state.values.lenght)
+      ];
     } else {
-      newValues.push(newValue);
+      newValues = [
+        ...this.state.values,
+        newValue
+      ];
     }
-    this.setState({ value: newValues });
+    this.setState({ values: newValues });
 
-    this.props.changeFilter(newValues, false);
+    this.props.changeFilter(newValues, true);
   }
 
   _categoryItem(top) {
@@ -50,7 +56,7 @@ class CategoriesComponent extends Component {
   _toggleChecked(event) {
     event.preventDefault();
     this.setState({ values: [] });
-    this.props.changeFilter([], true);
+    this.props.changeFilter([], false);
   }
 
   render() {

@@ -16,7 +16,8 @@ class LocationInputComponent extends Component {
     this.state = {
       value: '',
       locationsList: [],
-      showLocationList: false
+      showLocationList: false,
+      currentLocation: -1
     };
   }
 
@@ -62,9 +63,34 @@ class LocationInputComponent extends Component {
     this.location.focus();
   }
 
+  _nextLocation() {
+    return (this.state.currentLocation + 1) % this.state.locationsList.length;
+  }
+
+  _previousLocation() {
+    let previousIdx = this.state.currentLocation - 1;
+    if (previousIdx < 0) {
+      previousIdx = this.state.locationsList.length - 1;
+    }
+    return previousIdx;
+  }
+
   _cleanLocations(event) {
-    if (event.keyCode === 27) {
-      this.setState({ value: '' });
+    switch (event.keyCode) {
+      case 27:
+        this.setState({ value: '' });
+        break;
+      case 40:
+        this.setState({ currentLocation: this._nextLocation() });
+        break;
+      case 38:
+        this.setState({ currentLocation: this._previousLocation() });
+        break;
+      case 13:
+        this._selectLocation(this.state.locationsList[this.state.currentLocation]);
+        break;
+      default:
+        break;
     }
   }
 
@@ -80,11 +106,13 @@ class LocationInputComponent extends Component {
           onChange={event => this._findLocations(event)}
           onKeyDown={event => this._cleanLocations(event)}
           ref={(c) => { this.location = c; }}
+          onKeyPress={event => this._cleanLocations(event)}
         />
         <LocationListComponent
           list={this.state.locationsList}
           changeLocation={value => this._selectLocation(value)}
           show={this.state.showLocationList}
+          currentLocation={this.state.currentLocation}
         />
       </div>
     );

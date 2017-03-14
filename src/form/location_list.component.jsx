@@ -11,7 +11,7 @@ class LocationListComponent extends Component {
   _locationItem() {
     return (
       this.props.list.map((location, index) =>
-        <li key={index} className={styles.location}>
+        <li key={index} className={index === this.props.currentLocation ? styles.selectedLocation : styles.location}>
           <label htmlFor={`location-${index}`} className={styles.label}>
             <input
               id={`location-${index}`}
@@ -39,7 +39,7 @@ class LocationListComponent extends Component {
       return (
         <div className={styles.list}>
           <ul>
-            <li className={styles.location}>
+            <li className={styles.selectedLocation}>
               <span className={styles.label}>No results</span>
             </li>
           </ul>
@@ -53,7 +53,8 @@ class LocationListComponent extends Component {
 LocationListComponent.propTypes = {
   list: PropTypes.arrayOf(PropTypes.string).isRequired,
   changeLocation: PropTypes.func.isRequired,
-  show: PropTypes.bool.isRequired
+  show: PropTypes.bool.isRequired,
+  currentLocation: PropTypes.number.isRequired
 };
 
 export default LocationListComponent;

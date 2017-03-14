@@ -76,6 +76,7 @@ class LocationInputComponent extends Component {
           placeholder="Location"
           className={styles.input}
           value={this.state.value}
+          onFocus={() => this.props.toggleCategories(false)}
           onChange={event => this._findLocations(event)}
           onKeyDown={event => this._cleanLocations(event)}
           ref={(c) => { this.location = c; }}
@@ -91,7 +92,8 @@ class LocationInputComponent extends Component {
 }
 
 LocationInputComponent.propTypes = {
-  saveLocation: PropTypes.func.isRequired
+  saveLocation: PropTypes.func.isRequired,
+  toggleCategories: PropTypes.func.isRequired
 };
 
 export default LocationInputComponent;

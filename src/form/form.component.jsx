@@ -12,7 +12,8 @@ class FormComponent extends Component {
       search: '',
       categories: '',
       location: '',
-      showResult: false
+      showResult: false,
+      showCategories: false
     };
   }
 
@@ -26,6 +27,10 @@ class FormComponent extends Component {
 
   _saveLocation(value) {
     this.setState({ location: value });
+  }
+
+  _toggleCategories(value) {
+    this.setState({ showCategories: value });
   }
 
   _sendForm(event) {
@@ -53,10 +58,12 @@ class FormComponent extends Component {
           <SelectComponent
             saveSearch={value => this._saveSearch(value)}
             saveCategory={value => this._saveCategory(value)}
+            toggleCategories={value => this._toggleCategories(value)}
+            showCategories={this.state.showCategories}
           />
           <LocationInputComponent
             saveLocation={value => this._saveLocation(value)}
-            sendForm={event => this._sendForm(event)}
+            toggleCategories={value => this._toggleCategories(value)}
           />
           <input
             className={styles.submit}

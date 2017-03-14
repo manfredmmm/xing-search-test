@@ -16,22 +16,27 @@ class SelectComponent extends Component {
   constructor() {
     super();
     this.state = {
-      currentFilter: [],
-      showCategories: false
+      currentFilter: []
     };
   }
 
   _toggleCategories(event) {
     event.preventDefault();
-    this.setState({ showCategories: !this.state.showCategories });
+    this.props.toggleCategories(!this.props.showCategories);
   }
 
-  _changeFilter(values, hideDropdown) {
-    this.setState({
-      currentFilter: values,
-      showCategories: !hideDropdown
-    });
+  _changeFilter(values, showDropdown) {
+    this.setState({ currentFilter: values });
+    if (!showDropdown) {
+      this.props.toggleCategories(!this.props.showCategories);
+    }
     this.props.saveCategory(getNames(values));
+  }
+
+  _closeDropdown() {
+    if (this.props.showCategories) {
+      this.props.toggleCategories(!this.props.showCategories);
+    }
   }
 
   render() {
@@ -44,9 +49,9 @@ class SelectComponent extends Component {
     } else {
       displayFilter = (<span>in all categories</span>);
     }
-    const showCategories = this.state.showCategories;
+
     let categoriesDropdown = null;
-    if (showCategories) {
+    if (this.props.showCategories) {
       categoriesDropdown = (
         <CategoriesComponent
           categories={categories}
@@ -64,6 +69,7 @@ class SelectComponent extends Component {
           className={styles.input}
           required
           onChange={event => this.props.saveSearch(event.target.value)}
+          onFocus={() => this._closeDropdown()}
         />
         <a className={styles.select} href onClick={event => this._toggleCategories(event)}>
           {displayFilter}
@@ -76,7 +82,9 @@ class SelectComponent extends Component {
 
 SelectComponent.propTypes = {
   saveSearch: PropTypes.func.isRequired,
-  saveCategory: PropTypes.func.isRequired
+  saveCategory: PropTypes.func.isRequired,
+  toggleCategories: PropTypes.func.isRequired,
+  showCategories: PropTypes.bool.isRequired
 };
 
 export default SelectComponent;

@@ -63,10 +63,6 @@ class LocationInputComponent extends Component {
     this.location.focus();
   }
 
-  _nextLocation() {
-    return (this.state.currentLocation + 1) % this.state.locationsList.length;
-  }
-
   _previousLocation() {
     let previousIdx = this.state.currentLocation - 1;
     if (previousIdx < 0) {
@@ -81,7 +77,9 @@ class LocationInputComponent extends Component {
         this.setState({ value: '' });
         break;
       case 40:
-        this.setState({ currentLocation: this._nextLocation() });
+        this.setState({
+          currentLocation: (this.state.currentLocation + 1) % this.state.locationsList.length
+        });
         break;
       case 38:
         this.setState({ currentLocation: this._previousLocation() });
